@@ -4,6 +4,7 @@
             {{ language.get('updater_header_text') }}
         </div>
     </div>
+    <br>
     <div class='row'>
         <div class='col-md-12'>
             <h4>{{ language.get('updater_about_title') }}:</h4>
@@ -19,7 +20,7 @@
                     {% endif %}
                 </li>
             </ul>
-
+            <br>
             {% if new_version_available %}
 
                 <h4>{{ language.get('updater_history_title') }}</h4>
@@ -49,7 +50,7 @@
 
         </div>
     </div>
-
+    <br>
     {% if backups %}
         <div class="row">
             <h4>{{ language.get('updater_backups_title') }}</h4>

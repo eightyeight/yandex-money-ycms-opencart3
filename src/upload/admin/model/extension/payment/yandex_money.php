@@ -155,7 +155,7 @@ class ModelExtensionPaymentYandexMoney extends Model
                         }
                     }
                 } catch (\Exception $e) {
-                    // nothing to do
+                    $this->log('warning', 'Error while update payment status. Payment id: '.$payment['payment_id']);
                 }
             }
         }
@@ -190,19 +190,8 @@ class ModelExtensionPaymentYandexMoney extends Model
         try {
             $builder = \YandexCheckout\Request\Payments\Payment\CreateCaptureRequest::builder();
             $builder->setAmount($payment->getAmount());
-            $key     = uniqid('', true);
-            $tries   = 0;
             $request = $builder->build();
-            do {
-                $result = $client->capturePayment($request, $payment->getId(), $key);
-                if ($result === null) {
-                    $tries++;
-                    if ($tries > 3) {
-                        break;
-                    }
-                    sleep(2);
-                }
-            } while ($result === null);
+            $result  = $client->capturePayment($request, $payment->getId());
             if ($result === null) {
                 throw new RuntimeException('Failed to capture payment after 3 retries');
             }
@@ -413,18 +402,7 @@ class ModelExtensionPaymentYandexMoney extends Model
         }
 
         try {
-            $key   = uniqid('', true);
-            $tries = 0;
-            do {
-                $response = $this->getClient()->createRefund($request, $key);
-                if ($response === null) {
-                    $tries++;
-                    if ($tries >= 3) {
-                        break;
-                    }
-                    sleep(2);
-                }
-            } while ($response === null);
+            $response = $this->getClient()->createRefund($request);
         } catch (Exception $e) {
             $this->log('error', 'Failed to create refund: '.$e->getMessage());
 

@@ -286,7 +286,7 @@ $_['active_off']          = 'Disabled';
 $_['active']          = 'Activity';
 
 //Updater
-$_['update_tab_header'] = 'Module update';
+$_['updater_tab_header'] = 'Module update';
 $_['updater_success_message'] = 'Module version %s successfully downloaded and installed';
 $_['updater_error_unpack_failed'] = 'Unable to extract archive %s. More about the error in <a href="">module\'s logs</a>';
 $_['updater_error_backup_create_failed'] = 'Unable to create a backup copy of the installed module version. More about the error in <a href="%s">module\'s logs</a>';

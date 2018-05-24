@@ -8,7 +8,7 @@
 class ControllerExtensionPaymentYandexMoney extends Controller
 {
     const MODULE_NAME = 'yandex_money';
-    const MODULE_VERSION = '1.0.9';
+    const MODULE_VERSION = '1.0.11';
 
     public $fields_metrika = array(
         'yandex_money_metrika_active',
@@ -1418,6 +1418,9 @@ class ControllerExtensionPaymentYandexMoney extends Controller
         return $html;
     }
 
+    /**
+     * Экшен автообления.
+     */
     public function update()
     {
         $data = array();
@@ -1451,6 +1454,9 @@ class ControllerExtensionPaymentYandexMoney extends Controller
         $this->response->redirect($link);
     }
 
+    /**
+     * Экшен работы с бекапами.
+     */
     public function backups()
     {
         $link = $this->url->link('extension/payment/'.self::MODULE_NAME, 'user_token='.$this->session->data['user_token'],
